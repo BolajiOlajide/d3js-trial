@@ -1,11 +1,10 @@
-const w = 400;
-const h = 200;
+const w = 500;
+const h = 120;
 const padding = 5;
 const dataset = [5, 10, 13, 19, 21, 25, 11, 25, 22, 18, 7];
 const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
 
 function colorPicker(data) {
-  console.log({ data });
   return data <= 20 ? "#666" : "#FF0033";
 }
 
@@ -26,3 +25,13 @@ svg.selectAll("rect").data(dataset).enter().append("rect")
 //     height: function (d) { return d * 4; },
 //     fill: function (d) { return colorPicker(d); }
 //   });
+
+
+svg.selectAll("text").data(dataset).enter().append("text")
+  .text(d => d)
+  .attr("text-anchor", "middle")
+  .attr("x", (d, i) => i * (w / dataset.length) + (w / dataset.length - padding) / 2)
+  .attr("y", (d) => h - (d * 4) + 15)
+  .attr("font-family", "sans-serif")
+  .attr("font-size", 12)
+  .attr("fill", "white")
